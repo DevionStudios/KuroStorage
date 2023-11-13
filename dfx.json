@@ -1,0 +1,29 @@
+{
+  "canisters": {
+    "icp_hackathon_backend": {
+      "main": "src/icp_hackathon_backend/main.mo",
+      "type": "motoko"
+    },
+    "icp_hackathon_frontend": {
+      "dependencies": [
+        "icp_hackathon_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/icp_hackathon_frontend/src/index.html"
+      },
+      "source": [
+        "src/icp_hackathon_frontend/assets",
+        "dist/icp_hackathon_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

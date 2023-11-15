@@ -11,15 +11,21 @@ export default function Home() {
   const [file, setFile] = useState(null);
   const [extension, setFileExtension] = useState(null);
   const [fileName, setFileName] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { isConnected, principal } = useConnect();
+  const [reload, setReload] = useState(false);
   const handleFileChange = async (e) => {
+    if (e.target?.files?.length <= 0) return;
+    setIsLoading(true);
     await readFileDataAsBase64(e.target.files[0]);
     setFileName(e.target.files[0].name);
     console.log(e.target.files[0].name);
     setFileExtension(e.target.files[0].name.split(".").pop());
+    setIsLoading(false);
   };
 
   function readFileDataAsBase64(file) {
+    if (!file) return;
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
 
@@ -50,12 +56,15 @@ export default function Home() {
       alert("Please enter a description!");
       return;
     }
+    setIsLoading(true);
     await icp_hackathon_backend.add(
       Principal.fromText(principal),
       file,
       fileName,
       description
     );
+    setIsLoading(false);
+    setReload(!reload);
   };
   return (
     <main className="text-black">
@@ -100,6 +109,7 @@ export default function Home() {
                   "text-center justify-center mt-6 hover:bg-blue-700 hover:text-white"
                 }
                 onClick={handleSubmit}
+                disabled={isLoading}
                 style={{
                   color: "#000",
                 }}
@@ -109,7 +119,7 @@ export default function Home() {
         </div>
       </section>
       <section className="">
-        <Dashboard />
+        <Dashboard reload={reload} />
       </section>
     </main>
   );

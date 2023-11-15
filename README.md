@@ -1,24 +1,6 @@
-# icp_hackathon
+# KuroStorage
 
-Welcome to your new icp_hackathon project and to the internet computer development community. By default, creating a new project adds this README and some template files to your project directory. You can edit these template files to customize your project and to include your own code to speed up the development cycle.
-
-To get started, you might want to explore the project directory structure and the default configuration file. Working with this project in your development environment will not affect any production deployment or identity tokens.
-
-To learn more before you start working with icp_hackathon, see the following documentation available online:
-
-- [Quick Start](https://internetcomputer.org/docs/current/developer-docs/quickstart/hello10mins)
-- [SDK Developer Tools](https://internetcomputer.org/docs/current/developer-docs/build/install-upgrade-remove)
-- [Motoko Programming Language Guide](https://internetcomputer.org/docs/current/developer-docs/build/cdks/motoko-dfinity/motoko/)
-- [Motoko Language Quick Reference](https://internetcomputer.org/docs/current/references/motoko-ref/)
-- [JavaScript API Reference](https://erxue-5aaaa-aaaab-qaagq-cai.raw.icp0.io)
-
-If you want to start working on your project right away, you might want to try the following commands:
-
-```bash
-cd icp_hackathon/
-dfx help
-dfx canister --help
-```
+This is a completely decentralized filestorage with secure encryption and sharing capabilities. It is built on the Internet Computer.
 
 ## Running the project locally
 
@@ -50,7 +32,21 @@ npm start
 
 Which will start a server at `http://localhost:8080`, proxying API requests to the replica at port 4943.
 
-### Note on frontend environment variables
+## Future Scope
+
+The project can be extended in the following ways-
+
+- to make a platform like cloudinary which is completely decentralized based on the ICP chain.
+- to let users update their uploaded files and delete them as well.
+- to add network firewalls to prevent unauthorized access to the files.
+
+## Example Images And Videos
+
+We have given some of our example images. <br>
+
+[Home Page](./examples/1.png)
+
+#### Note on frontend environment variables
 
 If you are hosting frontend code somewhere without using DFX, you may need to make one of the following adjustments to ensure your project does not fetch the root key in production:
 

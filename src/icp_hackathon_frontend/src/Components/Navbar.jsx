@@ -41,7 +41,7 @@ const CustomNavbar = () => {
           width={50}
         />
         <span className="self-center whitespace-nowrap text-xl font-semibold text-white">
-          DICLocker
+          KuroStorage
         </span>
       </Navbar.Brand>
       <Navbar.Toggle />

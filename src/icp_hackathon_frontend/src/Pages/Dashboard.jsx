@@ -3,7 +3,7 @@ import DocumentCard from "../Components/DocumentCard";
 import { icp_hackathon_backend } from "../../../declarations/icp_hackathon_backend/index";
 import { useConnect } from "@connect2ic/react";
 import { Principal } from "@dfinity/principal";
-export default function Dashboard() {
+export default function Dashboard({ reload }) {
   const { isConnected, principal } = useConnect();
   const [data, setData] = useState([]);
   const fetchData = async () => {
@@ -19,7 +19,7 @@ export default function Dashboard() {
       return;
     }
     fetchData();
-  }, [isConnected]);
+  }, [isConnected, reload]);
   return (
     <>
       <main>

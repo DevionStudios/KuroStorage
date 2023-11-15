@@ -34,7 +34,7 @@ const CustomNavbar = () => {
     >
       <Navbar.Brand href="aboutus">
         <img
-          src={"/LOGO.jpg"}
+          src={"/Logo.jpeg"}
           className="mr-3"
           alt="Devion Logo"
           height={50}

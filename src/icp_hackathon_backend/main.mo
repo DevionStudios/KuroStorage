@@ -64,7 +64,7 @@ actor DigiLocker {
       case (?exists) {
         var newCertificate : Certificate = {
           var data = data;
-          var lastModified = exists[index].lastModified;
+          var lastModified = Time.now();
           var fileType = fileType;
           var description = description;
         };

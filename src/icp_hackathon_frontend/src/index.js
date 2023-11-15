@@ -9,23 +9,45 @@ function getAllDocuments() {
   return icp_hackathon_backend.get(PRINCIPAL);
 }
 
+async function deleteFirstDocument() {
+  await icp_hackathon_backend.delete(PRINCIPAL, 0);
+}
+
+async function updateFirstDocument() {
+  await icp_hackathon_backend.update(
+    PRINCIPAL,
+    0,
+    "Updated data",
+    "updated text/plain",
+    "Updated description"
+  );
+}
+
 document.querySelector("form").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const button = e.target.querySelector("button");
+  // test - create
+  // const button = e.target.querySelector("button");
 
-  const name = document.getElementById("name").value.toString();
+  // const name = document.getElementById("name").value.toString();
 
-  button.setAttribute("disabled", true);
+  // button.setAttribute("disabled", true);
 
-  await icp_hackathon_backend.add(
-    PRINCIPAL,
-    name,
-    "text/plain",
-    "Very important file"
-  );
+  // await icp_hackathon_backend.add(
+  //   PRINCIPAL,
+  //   name,
+  //   "text/plain",
+  //   "Very important file"
+  // );
 
-  button.removeAttribute("disabled");
+  // button.removeAttribute("disabled");
 
+  // test - delete
+  await doThis();
+  // await deleteFirstDocument();
+  // await doThis();
+
+  // test - update
+  await updateFirstDocument();
   await doThis();
 
   return false;

@@ -1,4 +1,4 @@
-import { ConnectButton } from "@connect2ic/react";
+import { ConnectButton, useConnect } from "@connect2ic/react";
 
 export default function ConnectWallet() {
   return (

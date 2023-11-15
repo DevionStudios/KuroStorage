@@ -5,6 +5,7 @@ import Button from "../Components/Button";
 import { icp_hackathon_backend } from "../../../declarations/icp_hackathon_backend/index";
 import { useConnect } from "@connect2ic/react";
 import { Principal } from "@dfinity/principal";
+import Dashboard from "./Dashboard";
 export default function Home() {
   const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
@@ -13,8 +14,8 @@ export default function Home() {
   const { isConnected, principal } = useConnect();
   const handleFileChange = async (e) => {
     await readFileDataAsBase64(e.target.files[0]);
-    setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
+    console.log(e.target.files[0].name);
     setFileExtension(e.target.files[0].name.split(".").pop());
   };
 
@@ -23,14 +24,15 @@ export default function Home() {
       const reader = new FileReader();
 
       reader.onload = (event) => {
+        console.log(event.target.result);
+        setFile(event.target.result);
         resolve(event.target.result);
       };
 
       reader.onerror = (err) => {
         reject(err);
       };
-
-      setFile(reader.readAsBinaryString(file));
+      reader.readAsBinaryString(file);
     });
   }
 
@@ -48,8 +50,12 @@ export default function Home() {
       alert("Please enter a description!");
       return;
     }
-    console.log(file);
-    // icp_hackathon_backend.add(Principal.fromText(principal));
+    await icp_hackathon_backend.add(
+      Principal.fromText(principal),
+      file,
+      fileName,
+      description
+    );
   };
   return (
     <main className="text-black">
@@ -101,6 +107,9 @@ export default function Home() {
             </form>
           </div>
         </div>
+      </section>
+      <section className="">
+        <Dashboard />
       </section>
     </main>
   );

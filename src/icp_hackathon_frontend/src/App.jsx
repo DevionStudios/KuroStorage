@@ -18,9 +18,7 @@ function App() {
       <ConnectDialog />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navigate to="/home" />} />
-          <Route path="/home" index element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </>

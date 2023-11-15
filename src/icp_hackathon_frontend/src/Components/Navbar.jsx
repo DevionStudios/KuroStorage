@@ -47,7 +47,7 @@ const CustomNavbar = () => {
       <Navbar.Toggle />
       <Navbar.Collapse>
         <Navbar.Link
-          href="/home"
+          href="/"
           active={currentPage.includes("home")}
           style={
             currentPage.includes("home")
@@ -61,7 +61,7 @@ const CustomNavbar = () => {
         >
           Home
         </Navbar.Link>
-        <Navbar.Link
+        {/* <Navbar.Link
           href="/dashboard"
           active={currentPage.includes("dashboard")}
           style={
@@ -75,7 +75,7 @@ const CustomNavbar = () => {
           }
         >
           Dashboard
-        </Navbar.Link>
+        </Navbar.Link> */}
         <ConnectWallet />
       </Navbar.Collapse>
     </Navbar>

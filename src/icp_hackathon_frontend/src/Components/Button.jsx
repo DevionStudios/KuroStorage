@@ -37,7 +37,7 @@ export default function Button(
         onSubmit={onSubmit}
         {...props}
       >
-        {title}
+        {!disabled ? title : "Loading..."}
       </button>
     </div>
   );

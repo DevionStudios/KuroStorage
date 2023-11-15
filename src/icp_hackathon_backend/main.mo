@@ -9,18 +9,22 @@ import Array "mo:base/Array";
 actor DigiLocker {
 
   public type Certificate = {
-    var hash : Text;
+    var data : Text;
+    var fileType : Text;
+    var description : Text;
     var lastModified : Int; // timestamp in seconds
   };
 
   stable var userDocuments : [(Principal, [Certificate])] = [];
   var documents = HashMap.HashMap<Principal, [Certificate]>(1, Principal.equal, Principal.hash);
 
-  public func add(user : Principal, data : Text) {
+  public func add(user : Principal, data : Text, fileType : Text, description : Text) {
     let lastModified = Time.now();
     let certificate = {
-      var hash = data;
+      var data = data;
       var lastModified = lastModified;
+      var fileType = fileType;
+      var description = description;
     };
 
     var exists = documents.get(user);
@@ -29,26 +33,22 @@ actor DigiLocker {
         documents.put(user, [certificate]);
       };
       case (?exists) {
-        let newCertificate : Certificate = {
-          var hash = data;
-          var lastModified = lastModified;
-        };
-        let newCertificates : [Certificate] = Array.append(exists, [newCertificate]);
+        let newCertificates : [Certificate] = Array.append(exists, [certificate]);
         documents.put(user, newCertificates);
       };
     };
 
   };
 
-  public query func get(forPrincipal : Principal) : async [(hash : Text, lastModified : Int)] {
+  public query func get(forPrincipal : Principal) : async [(data : Text, lastModified : Int, fileType : Text, description : Text)] {
     let exists : ?[Certificate] = documents.get(forPrincipal);
     switch (exists) {
       case (null) { Prelude.unreachable() };
       case (?exists) {
-        var certificates : [(Text, Int)] = Array.tabulate<(Text, Int)>(
+        var certificates : [(Text, Int, Text, Text)] = Array.tabulate<(Text, Int, Text, Text)>(
           exists.size(),
-          func(i : Nat) : (Text, Int) {
-            (exists[i].hash, exists[i].lastModified);
+          func(i : Nat) : (Text, Int, Text, Text) {
+            (exists[i].data, exists[i].lastModified, exists[i].fileType, exists[i].description);
           },
         );
 
@@ -57,14 +57,16 @@ actor DigiLocker {
     };
   };
 
-  public func update(forPrincipal : Principal, index : Nat, data : Text) {
+  public func update(forPrincipal : Principal, index : Nat, data : Text, fileType : Text, description : Text) {
     let exists : ?[Certificate] = documents.get(forPrincipal);
     switch (exists) {
       case (null) { Prelude.unreachable() };
       case (?exists) {
         var newCertificate : Certificate = {
-          var hash = data;
+          var data = data;
           var lastModified = exists[index].lastModified;
+          var fileType = fileType;
+          var description = description;
         };
         var newCertificates : [Certificate] = Array.tabulate(
           exists.size(),

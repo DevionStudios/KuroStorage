@@ -1,4 +1,13 @@
 import { icp_hackathon_backend } from "../../declarations/icp_hackathon_backend";
+import { Principal } from "@dfinity/principal";
+
+const PRINCIPAL = Principal.fromText(
+  `t3dfc-epwlr-v7ne7-g4owi-jlbyt-xq4k6-iwnpu-g6522-vru7r-6qbxo-2qe`
+);
+
+function getAllDocuments() {
+  return icp_hackathon_backend.get(PRINCIPAL);
+}
 
 document.querySelector("form").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -8,12 +17,22 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 
   button.setAttribute("disabled", true);
 
-  // Interact with foo actor, calling the greet method
-  const greeting = await icp_hackathon_backend.greet(name);
+  await icp_hackathon_backend.add(
+    PRINCIPAL,
+    name,
+    "text/plain",
+    "Very important file"
+  );
 
   button.removeAttribute("disabled");
 
-  document.getElementById("greeting").innerText = greeting;
+  await doThis();
 
   return false;
 });
+
+async function doThis() {
+  getAllDocuments().then((documents) => {
+    console.log("Documents: ", documents);
+  });
+}

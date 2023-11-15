@@ -44,7 +44,8 @@ The project can be extended in the following ways-
 
 We have given some of our example images. <br>
 
-[Home Page](./examples/1.png)
+- [Home Page](./examples/1.png)
+- [Wallet Modal](./examples/2.png)
 
 #### Note on frontend environment variables
 

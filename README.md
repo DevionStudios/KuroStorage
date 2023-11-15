@@ -46,6 +46,7 @@ We have given some of our example images. <br>
 
 - [Home Page](./examples/1.png)
 - [Wallet Modal](./examples/2.png)
+- [Youtube Link](https://youtu.be/pe2tJfgDNuE)
 
 #### Note on frontend environment variables
 
